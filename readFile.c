@@ -27,8 +27,6 @@ void trimWord(char *str, char *str1)
     // at the end of new string
     str1[k] = '\0';
  
-    // Print the string with no whitespaces
-   printf("Trimmed String: %s", str1);
 }
 
 void readCsv(char* route) {
@@ -99,6 +97,7 @@ void readCsv(char* route) {
             load->time = hours[i]; 
             users = atoi(token);
             load->users = users;
+            printf("Hora: %d, usuarios: %d\n", load->time, load->users);
             i++;
         }
         stops[j] = stop;
@@ -107,4 +106,5 @@ void readCsv(char* route) {
         printf("\n");
     }
 
+    fclose(fp);
 }

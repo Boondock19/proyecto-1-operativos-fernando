@@ -17,8 +17,17 @@ struct stop{
     char route_duration[6];
     PassengersLoad* load[24];
 };
+
+struct bus{
+    int users_space;
+    char stop[4];
+    char time[6];
+    char route_duration[6];
+};
+typedef struct bus Bus;
+
 typedef struct stop Stop;
 
-char *trimString(char *str);
+void trimWord(char *str, char *str1);
 void readCsv(char* route);
 
