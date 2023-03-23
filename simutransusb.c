@@ -9,33 +9,22 @@
 #include "readFile.h"
 
 
-/*
-#define sizeOfBuffer 1024
-#define numRoutes 50
-#define hMax 24
-#define bMax 200
-struct load {
-    char cod[4];
-    char name[64];
-    int 
-
-};
-
-struct service {
-    char cod[4];
-    char 
-};
-
+/* 
+    Varibles globales de archivos de carga y categorizacion de servicio
+    y tiempo de la simulacion.
 */
-
-//Vars
 float timeOfSim = 0.25;
 char *fileOfService = NULL;
 char *fileOfCharge = NULL;
 
 int main(int argc, char *argv[]) {
 
-    //Command
+    //Lectura de comandos de entrada
+    if(argc == 1) {
+        printf("No se especifico ningun comando\n");
+        return 0;
+    }
+
     if (strcmp(argv[1], "-s") == 0) {
         fileOfService = argv[2];
         switch (argc)
