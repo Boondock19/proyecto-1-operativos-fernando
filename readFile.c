@@ -38,27 +38,23 @@ void readCsv(char* route) {
 
     fp = fopen(route, "r");
     if (fp == NULL) {
-        printf("Error opening file");
+        printf("Error al abrir el archivo");
+        return;
     }
 
     fgets(row, MAX_CHAR, fp);
 
     if (feof(fp) != true) {
         
-        printf("%s", row);
+       
         int i = 0;
         token = strtok(row, ",");
-        printf("Este es el token %s\n", token);
-        printf("Este es el valor num %d\n", atoi(token));
         if (atoi(token) != 0) {
             hours[i] = atoi(token);
             i++;
         }
 
         while (token != NULL) {
-         
-            printf("Este es el token %s\n", token);
-            printf("Este es el valor num %d\n", atoi(token));
             token = strtok(NULL, ",");
         }
     }
@@ -97,7 +93,6 @@ void readCsv(char* route) {
             load->time = hours[i]; 
             users = atoi(token);
             load->users = users;
-            printf("Hora: %d, usuarios: %d\n", load->time, load->users);
             i++;
         }
         stops[j] = stop;
@@ -106,5 +101,89 @@ void readCsv(char* route) {
         printf("\n");
     }
 
+    fclose(fp);
+}
+
+/*
+    Funcion que dado un cod de una estacion o Stop
+    retorna el Stop que tiene ese cod.
+*/
+
+Stop* getStop(char* cod) {
+    for(int i = 0; i < MAX_STOPS; i++){
+        if(stops[i] != NULL) {
+            if(strcmp(stops[i]->cod, cod) == 0)
+                return stops[i];
+        } else {
+            break;
+        }
+    }
+    return NULL;
+}
+
+
+
+void readTxt (char* route) {
+     FILE *fp;
+    char row[MAX_CHAR];
+    char *token;
+    int hours[25] = {-1};
+    int j = 0;
+
+    fp = fopen(route, "r");
+
+    if (fp == NULL) {
+        printf("Error al abrir el archivo");
+        return;
+    }
+
+    
+
+    while (feof(fp) != true){
+        fgets(row, MAX_CHAR, fp);
+        Stop* stop;
+        int i = 0; 
+        token = strtok(row, " ");
+
+        if(getStop(token) == NULL) {
+            printf("No se consiguio a la Stop %s",token);
+            continue;
+        } else {
+            stop = getStop(token);
+            printf("Se consiguio a la Stop %s\n",stop->cod);
+        }
+
+        while (token != NULL) {
+            Bus* bus = (Bus *) malloc (sizeof(Bus));
+            token = strtok(NULL, " ");
+            char* tempToken;
+            char hour[6] = {'\0'};
+            char loadCapacity[4] = {'\0'};
+
+            if (token == NULL) break;
+                
+            tempToken = (char *) malloc (strlen(token)+1);
+            strcpy(tempToken, token);
+            for (int i = 0; i < strlen(tempToken); i++) {
+                if (token[i] == '(') {
+                    loadCapacity[0] = token[i+1];
+                    loadCapacity[1] = token[i+2];
+                    loadCapacity[2] = '\0';
+                    break;
+                }
+                hour[i] = token[i];
+            }
+            
+            strcpy(bus->time, hour);
+            bus->users_space = atoi(loadCapacity);
+            stop->buses[i] = bus;
+            stop->buses_amount++;
+            i++;
+
+            free(tempToken);
+
+        }
+        printf("\n");
+    }
     fclose(fp);
 }

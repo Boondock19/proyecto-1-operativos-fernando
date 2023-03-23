@@ -49,6 +49,7 @@ int main(int argc, char *argv[]) {
             timeOfSim = 0.25;
             fileOfCharge = "carga.csv";
             readCsv(fileOfCharge);
+            readTxt(fileOfService);
             break;
         case 5:
             if (strcmp(argv[3], "-c") == 0) {
@@ -57,12 +58,14 @@ int main(int argc, char *argv[]) {
                 fileOfCharge = argv[4];
                 timeOfSim = 0.25;
                 readCsv(fileOfCharge);
+                readTxt(fileOfService);
             } else if (strcmp(argv[3], "-t") == 0) {
                 printf("No especifico un archivo de carga, se tomara el archivo carga.csv\n");
                 printf("Especifico el tiempo de simulacion %s\n",argv[4]);
                 fileOfCharge = "carga.csv";
                 timeOfSim = atof(argv[4]);
                 readCsv(fileOfCharge);
+                readTxt(fileOfService);
             }
             break;
         case 7:
@@ -71,13 +74,14 @@ int main(int argc, char *argv[]) {
             fileOfCharge = argv[4];
             timeOfSim = atof(argv[6]);
             readCsv(fileOfCharge);
+            readTxt(fileOfService);
             break;
         default:
             break;
         }
 
     } else {
-        printf("ERROR: File name not inserted in command\n");
+        printf("Error: No se especifico un txt de categorizacion de servicio\n");
     }
 
     
