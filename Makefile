@@ -17,7 +17,7 @@ all: simutransusb
 # hashtable.o:
 # 	$(CC) $(CFLAGS) -o hashtable hashtable.h
 
-OBJETOS  = simutransusb.o 
+OBJETOS  = readFile.o simutransusb.o 
 
 simutransusb: $(OBJETOS)
 	$(LINKEAR) $(OBJETOS) -o simutransusb
@@ -25,6 +25,8 @@ simutransusb: $(OBJETOS)
 simutransusb.o: simutransusb.c
 	$(CC) simutransusb.c -o simutransusb.o
 
+readFile.o : readFile.c readFile.h
+	$(CC) readFile.c -o readFile.o
 
 clean:
 	rm *.o simutransusb
