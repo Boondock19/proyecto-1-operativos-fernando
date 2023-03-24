@@ -8,23 +8,31 @@ void trimWord(char *str, char *str1)
 {
     int idx = 0, j, k = 0;
  
-    // Iterate String until last
-    // leading space character
+    /*
+        Iteramos hasta el ultimo caracter de la cadena
+    */
     while (str[idx] == ' ' || str[idx] == '\t' || str[idx] == '\n')
     {
         idx++;
     }
  
-    // Run a for loop from index until the original
-    // string ends and copy the content of str to str1
+    /*
+        Iteramos hasta el ultimo caracter de la cadena original y
+        copiamos el contenido de str a str1
+    */
+
     for (j = idx; str[j] != '\0'; j++)
     {
         str1[k] = str[j];
         k++;
     }
  
-    // Insert a string terminating character
-    // at the end of new string
+
+    /*
+        Insertamos el caracter de terminacion
+        en el extremo final de la nueva cadena
+    */
+   
     str1[k] = '\0';
  
 }
