@@ -25,6 +25,10 @@ int main(int argc, char *argv[]) {
         return 0;
     }
 
+    /* 
+        Manejador de comandos de entrada, dependiendo de la cantidad de argumentos
+        y su valor se toman las acciones correspondientes.
+    */
     if (strcmp(argv[1], "-s") == 0) {
         fileOfService = argv[2];
         switch (argc)

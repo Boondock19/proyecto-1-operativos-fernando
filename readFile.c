@@ -38,7 +38,7 @@ void readCsv(char* route) {
 
     fp = fopen(route, "r");
     if (fp == NULL) {
-        printf("Error al abrir el archivo");
+        printf("Error al abrir el archivo\n");
         return;
     }
 
@@ -98,7 +98,6 @@ void readCsv(char* route) {
         stops[j] = stop;
         j++;
 
-        printf("\n");
     }
 
     fclose(fp);
@@ -133,7 +132,7 @@ void readTxt (char* route) {
     fp = fopen(route, "r");
 
     if (fp == NULL) {
-        printf("Error al abrir el archivo");
+        printf("Error al abrir el archivo\n");
         return;
     }
 
@@ -146,7 +145,7 @@ void readTxt (char* route) {
         token = strtok(row, " ");
 
         if(getStop(token) == NULL) {
-            printf("No se consiguio a la Stop %s",token);
+            printf("No se consiguio a la Stop %s\n",token);
             continue;
         } else {
             stop = getStop(token);
@@ -164,6 +163,11 @@ void readTxt (char* route) {
                 
             tempToken = (char *) malloc (strlen(token)+1);
             strcpy(tempToken, token);
+            /* 
+                Debemos utilzar esta metodologia para poder
+                leer el valor de la capacidad en el arhivo
+                dado el formato indicado en el PDF.
+            */
             for (int i = 0; i < strlen(tempToken); i++) {
                 if (token[i] == '(') {
                     loadCapacity[0] = token[i+1];
@@ -176,6 +180,7 @@ void readTxt (char* route) {
             
             strcpy(bus->time, hour);
             bus->users_space = atoi(loadCapacity);
+            printf("Capacidad: %d\n",bus->users_space);
             stop->buses[i] = bus;
             stop->buses_amount++;
             i++;

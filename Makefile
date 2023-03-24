@@ -29,4 +29,4 @@ readFile.o : readFile.c readFile.h
 	$(CC) readFile.c -o readFile.o
 
 clean:
-	rm *.o simutransusb
+	rm *.o
